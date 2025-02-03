@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MLModelAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49ee40bec10062e3d4efca6fb986df81c06c32d0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e3794664a3c2acd7e92f9358f047c326c2efa9a")]
 [assembly: System.Reflection.AssemblyProductAttribute("MLModelAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MLModelAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
