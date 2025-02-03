@@ -6,11 +6,14 @@ EXPOSE 80
 # Use SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["MLModelAPI.csproj", "./"]
-RUN dotnet restore "./MLModelAPI.csproj"
+
+# Copy the project file
+COPY MLModelAPI/MLModelAPI.csproj MLModelAPI/
+WORKDIR /src/MLModelAPI
+RUN dotnet restore
 
 # Copy everything and build the application
-COPY . .
+COPY MLModelAPI/. .
 RUN dotnet publish -c Release -o /app
 
 # Final runtime image
@@ -18,4 +21,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "MLModelAPI.dll"]
+
 
