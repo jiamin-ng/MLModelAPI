@@ -1,0 +1,47 @@
+# **Compiled Binaries & Build Artifacts**
+bin/
+obj/
+app.publish/
+out/
+
+# **User-Specific & IDE Settings**
+.vscode/
+*.user
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.docstates
+
+# **ASP.NET Core Secrets & Configurations**
+secrets.json
+appsettings.Development.json
+
+# **Log & Debug Files**
+*.log
+*.tlog
+*.cache
+logs/
+debug.log
+
+# **Dependency Directories**
+node_modules/
+bower_components/
+packages/
+
+# **NuGet Packages & Restore Data**
+*.nupkg
+*.snupkg
+project.lock.json
+project.assets.json
+
+# **Docker & Container Files**
+docker-compose.override.yml
+.env
+
+# **Entity Framework Migrations**
+migrations/
+
+# **JetBrains Rider & ReSharper Files**
+.idea/
+*.DotSettings.user
+
