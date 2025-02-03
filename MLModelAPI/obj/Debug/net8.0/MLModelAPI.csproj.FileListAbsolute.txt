@@ -37,3 +37,4 @@
 /Users/JIAMIN./Documents/Projects/AD_Project/AD_Cloud_Prototype/01_WebApp/MLModelAPI/obj/Debug/net8.0/MLModelAPI.pdb
 /Users/JIAMIN./Documents/Projects/AD_Project/AD_Cloud_Prototype/01_WebApp/MLModelAPI/obj/Debug/net8.0/MLModelAPI.genruntimeconfig.cache
 /Users/JIAMIN./Documents/Projects/AD_Project/AD_Cloud_Prototype/01_WebApp/MLModelAPI/obj/Debug/net8.0/ref/MLModelAPI.dll
+/Users/JIAMIN./Documents/Projects/AD_Project/AD_Cloud_Prototype/01_WebApp/MLModelAPI/obj/Debug/net8.0/MLModelAPI.sourcelink.json

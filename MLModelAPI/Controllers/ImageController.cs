@@ -36,7 +36,7 @@ namespace MLModelAPI.Controllers
                 }
 
                 // Forward image to ML model
-                var mlApiUrl = "http://127.0.0.1:5001/predict";
+                var mlApiUrl = "http://128.199.250.106:5001/predict";
                 using (var fileStream = new FileStream(filePath, FileMode.Open))
                 {
                     var content = new MultipartFormDataContent();
