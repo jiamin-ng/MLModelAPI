@@ -12,7 +12,6 @@ namespace MLModelAPI.Controllers
     [Route("api/Image")]
     public class ImageController : ControllerBase
     {
-
         private readonly HttpClient _httpClient;
 
         public ImageController()
