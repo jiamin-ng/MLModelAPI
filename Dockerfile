@@ -1,8 +1,10 @@
 # Use official ASP.NET runtime as a base image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+
+# Ensure the container listens on the correct port
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
 
 # Use SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
