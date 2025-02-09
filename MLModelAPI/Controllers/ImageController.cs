@@ -20,28 +20,28 @@ namespace MLModelAPI.Controllers
         }
 
         [HttpPost("predict")]
-        public async Task<IActionResult> Predict([FromForm] IFormFile file)
+        public async Task<IActionResult> Predict([FromForm] IFormFile image)
         {
-            if (file == null || file.Length == 0)
+            if (image == null || image.Length == 0)
                 return BadRequest("No image file uploaded.");
 
             try
             {
                 // Save the uploaded file temporarily
-                var filePath = Path.Combine(Path.GetTempPath(), file.FileName);
+                var filePath = Path.Combine(Path.GetTempPath(), image.FileName);
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await file.CopyToAsync(stream);
+                    await image.CopyToAsync(stream);
                 }
 
                 // Forward image to ML model
-                var mlApiUrl = "http://128.199.250.106:5000/predict";
+                var mlApiUrl = "http://159.223.85.131:5000/predict";
                 using (var fileStream = new FileStream(filePath, FileMode.Open))
                 {
                     var content = new MultipartFormDataContent();
                     var streamContent = new StreamContent(fileStream);
                     streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpg");
-                    content.Add(streamContent, "file", file.FileName);
+                    content.Add(streamContent, "image", image.FileName);
 
                     var response = await _httpClient.PostAsync(mlApiUrl, content);
                     if (!response.IsSuccessStatusCode)

@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "RdSIWAOWQ7gGOMGZ7C1IdXeN+wer5n8vOVE0E5gIpsc=",
+  "Hash": "jEtYnXYCEebRxkyRZ4cmQP0asJVEj+KymhKTdRf8+yM=",
   "Source": "MLModelAPI",
   "BasePath": "_content/MLModelAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
