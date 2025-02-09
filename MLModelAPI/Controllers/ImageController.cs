@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 namespace MLModelAPI.Controllers
 {
@@ -24,11 +20,12 @@ namespace MLModelAPI.Controllers
         {
             if (image == null || image.Length == 0)
                 return BadRequest("No image file uploaded.");
+            
+            string filePath = Path.Combine(Path.GetTempPath(), image.FileName);
 
             try
             {
                 // Save the uploaded file temporarily
-                var filePath = Path.Combine(Path.GetTempPath(), image.FileName);
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await image.CopyToAsync(stream);
@@ -50,14 +47,55 @@ namespace MLModelAPI.Controllers
                         return StatusCode((int)response.StatusCode, errorMessage);
                     }
 
-                    var result = await response.Content.ReadAsStringAsync();
-                    return Ok(result);  // Return ML model response to mobile app
+                    // Read and parse the response
+                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    var mlResponse = JsonSerializer.Deserialize<MlResponse>(jsonResponse, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    if (mlResponse?.Detections == null || mlResponse.Detections.Count == 0)
+                        return NotFound("No species detected.");
+
+                    // Extract uniqle class names
+                    var speciesList = mlResponse.Detections
+                        .Select(d => d.ClassName)
+                        .Distinct()
+                        .ToList();
+
+                    return Ok(new { species = speciesList });  // Return ML model response to mobile app
                 }
             }
             catch (HttpRequestException ex)
             {
                 return StatusCode(500, $"Error communicating with ML model: {ex.Message}");
             }
+            catch (JsonException ex)
+            {
+                return StatusCode(500, $"Error parsing ML model response: {ex.Message}");
+            }
+            finally
+            {
+                // Delete the temporary file
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+            }
+        }
+
+        private class MlResponse
+        {
+            [JsonPropertyName("detections")]
+            public List<Detection> Detections { get; set; }
+        }
+
+        private class Detection
+        {
+            [JsonPropertyName("class_name")]
+            public string ClassName { get; set; }
+            [JsonPropertyName("confidence")]
+            public float Confidence { get; set; }
         }
     }
 }
