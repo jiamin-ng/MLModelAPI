@@ -3,8 +3,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 
 # Ensure the container listens on the correct port
-ENV ASPNETCORE_URLS=http://+:8080
-EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:80
+EXPOSE 80
 
 # Use SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
